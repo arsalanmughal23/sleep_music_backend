@@ -9,7 +9,6 @@
 /storage/*.key
 /storage/logs/*.log
 /.idea
-/.vscode
 /.vagrant
 Homestead.json
 Homestead.yaml
@@ -63,3 +62,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+temp_auto_push.bat
+temp_interactive_push.bat

@@ -16,12 +16,12 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name'     => "Super Admin",
-                'email'    => "superadmin@fomarkmedia.com",
+                'email'    => "superadmin@sleepmeditation.com",
                 'password' => bcrypt('superadmin123')
             ],
             [
                 'name'     => "Admin",
-                'email'    => "admin@fomarkmedia.com",
+                'email'    => "admin@sleepmeditation.com",
                 'password' => bcrypt('admin123')
             ]
         ]);
