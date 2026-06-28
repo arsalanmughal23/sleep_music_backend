@@ -8,13 +8,14 @@
 /public/storage
 /storage/*.key
 /storage/logs/*.log
+/vendor
 /.idea
+/.vscode
 /.vagrant
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-vendor/
 .env
 
 # Node artifact files
