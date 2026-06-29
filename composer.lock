@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa41a1059a19e17fa72dbb7bce5173ad",
+    "content-hash": "b509865b989b53b9f7263ca8f43800cd",
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -209,16 +209,16 @@
             "time": "2022-06-16T18:14:10+00:00"
         },
         {
-            "name": "davejamesmiller/laravel-breadcrumbs",
+            "name": "diglactic/laravel-breadcrumbs",
             "version": "5.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/davejamesmiller/laravel-breadcrumbs.git",
+                "url": "https://github.com/diglactic/laravel-breadcrumbs.git",
                 "reference": "99f92a706faefb5e1816caa96e877a0184509e5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davejamesmiller/laravel-breadcrumbs/zipball/99f92a706faefb5e1816caa96e877a0184509e5b",
+                "url": "https://api.github.com/repos/diglactic/laravel-breadcrumbs/zipball/99f92a706faefb5e1816caa96e877a0184509e5b",
                 "reference": "99f92a706faefb5e1816caa96e877a0184509e5b",
                 "shasum": ""
             },
@@ -237,12 +237,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "DaveJamesMiller\\Breadcrumbs\\BreadcrumbsServiceProvider"
-                    ],
                     "aliases": {
                         "Breadcrumbs": "DaveJamesMiller\\Breadcrumbs\\Facades\\Breadcrumbs"
-                    }
+                    },
+                    "providers": [
+                        "DaveJamesMiller\\Breadcrumbs\\BreadcrumbsServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -265,7 +265,10 @@
             "keywords": [
                 "laravel"
             ],
-            "abandoned": "diglactic/laravel-breadcrumbs",
+            "support": {
+                "issues": "https://github.com/diglactic/laravel-breadcrumbs/issues",
+                "source": "https://github.com/diglactic/laravel-breadcrumbs/tree/5.3.2"
+            },
             "time": "2019-12-30T22:50:51+00:00"
         },
         {
@@ -1094,6 +1097,10 @@
                 "flare",
                 "ignition"
             ],
+            "support": {
+                "issues": "https://github.com/facade/ignition-contracts/issues",
+                "source": "https://github.com/facade/ignition-contracts/tree/1.0.1"
+            },
             "time": "2020-07-14T10:10:28+00:00"
         },
         {
@@ -7872,6 +7879,6 @@
     "platform": {
         "php": "^7.1.3"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
