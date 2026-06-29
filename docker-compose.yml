@@ -1,0 +1,52 @@
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: web_server
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+      - ./storage:/var/www/html/storage  # Persist storage
+    depends_on:
+      - db
+    networks:
+      - my_network
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_HOST=${DB_HOST}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my_network
+    env_file:
+      - .env
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  db_data:
