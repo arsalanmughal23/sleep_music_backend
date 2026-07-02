@@ -6,13 +6,45 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
     && sed -i '/buster-updates/d' /etc/apt/sources.list
 
 # Install dependencies
-RUN apt-get update && apt-get install -y git zip unzip libpng-dev libjpeg62-turbo-dev libfreetype6-dev libicu-dev libxslt1-dev libzip-dev libonig-dev libxml2-dev libcurl4-openssl-dev libssl-dev cron && docker-php-ext-configure gd && docker-php-ext-install -j$(nproc) bcmath ctype curl dom ftp gd intl mbstring opcache pdo_mysql simplexml soap sockets xsl zip
+RUN apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libicu-dev \
+    libxslt1-dev \
+    libzip-dev \
+    libonig-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    cron \
+    && docker-php-ext-configure gd \
+    && docker-php-ext-install -j$(nproc) \
+    bcmath \
+    ctype \
+    curl \
+    dom \
+    ftp \
+    gd \
+    intl \
+    mbstring \
+    opcache \
+    pdo_mysql \
+    simplexml \
+    soap \
+    sockets \
+    xsl \
+    zip
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
 COPY ./apache-config /etc/apache2/sites-available
 RUN a2ensite laravel.conf
+RUN a2dissite 000-default default-ssl
 
 # Set Apache environment variables
 ENV APACHE_RUN_USER=www-data
@@ -41,10 +73,17 @@ RUN { \
 
 WORKDIR /var/www/html
 
-# ls -la /etc/apache2/sites-enabled/
-# a2ensite laravel.conf
-# a2dissite 000-default.conf
-# service apache2 reload
+# Copy application files first
+COPY . /var/www/html/
+
+# Run composer install (with error handling if composer.json is missing)
+RUN if [ -f composer.json ] && [ ! -d vendor ]; then composer install --no-interaction --no-progress --optimize-autoloader || true; fi
+
+# Use custom entrypoint
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+# Start Apache
+CMD ["apache2-foreground"]
 
 # Grant permissions
 # docker exec mysql_db mysql -u root -p${DB_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON ${DB_DATABASE}.* TO '${DB_USERNAME}'@'%';"
