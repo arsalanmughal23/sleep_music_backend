@@ -43,8 +43,7 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 COPY ./apache-config /etc/apache2/sites-available
-RUN a2ensite laravel.conf
-RUN a2dissite 000-default default-ssl
+RUN a2ensite laravel.conf && a2dissite 000-default default-ssl
 
 # Set Apache environment variables
 ENV APACHE_RUN_USER=www-data
@@ -71,13 +70,13 @@ RUN { \
     echo "date.timezone=UTC"; \
     } > /usr/local/etc/php/conf.d/custom.ini
 
+# Fix Git security issue
+RUN git config --global --add safe.directory /var/www/html
+
 WORKDIR /var/www/html
 
 # Copy application files first
 COPY . /var/www/html/
-
-# Run composer install (with error handling if composer.json is missing)
-RUN if [ -f composer.json ] && [ ! -d vendor ]; then composer install --no-interaction --no-progress --optimize-autoloader || true; fi
 
 # Use custom entrypoint
 ENTRYPOINT ["./docker-entrypoint.sh"]
@@ -85,8 +84,4 @@ ENTRYPOINT ["./docker-entrypoint.sh"]
 # Start Apache
 CMD ["apache2-foreground"]
 
-# Grant permissions
-# docker exec mysql_db mysql -u root -p${DB_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON ${DB_DATABASE}.* TO '${DB_USERNAME}'@'%';"
-# docker exec mysql_db mysql -u root -p -e "GRANT ALL PRIVILEGES ON sleep_meditation.* TO 'db_user'@'%';"
-
-# pv ./sleepmusic_live_12July2024.sql | docker exec -i mysql_db mysql -u db_user -pdb_password sleep_meditation
+# pv ./db.sql | docker exec -i mysql_db mysql -u <db_username> -p<db_password> <db_name>

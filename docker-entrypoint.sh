@@ -3,13 +3,15 @@ set -e
 
 echo "🚀 Starting entrypoint script..."
 
-# Function to wait for MySQL
-wait_for_mysql() {
-    echo "⏳ Waiting for MySQL to be ready..."
-    while ! nc -z mysql_db 3306; do
-        sleep 1
-    done
-    echo "✅ MySQL is ready!"
+# Install Composer dependencies
+composer_install() {
+    if [ -f ./composer.json ] && [ ! -d ./vendor ]; then
+        echo "📦 Installing Composer dependencies..."
+        composer install --no-interaction --no-progress --optimize-autoloader --no-dev || \
+        composer install --no-interaction --no-progress --optimize-autoloader
+    else
+        echo "⏭️ Skipping Composer install"
+    fi
 }
 
 # Run database migrations if needed
@@ -39,12 +41,12 @@ set_permissions() {
 
 # Main execution
 main() {
-    # Optional: Wait for database
-    # wait_for_mysql
-    
     # Set permissions
     set_permissions
-    
+
+    # Install Composer dependencies
+    composer_install
+
     # Run artisan commands if Laravel exists
     if [ -f /var/www/html/artisan ]; then
         clear_cache
