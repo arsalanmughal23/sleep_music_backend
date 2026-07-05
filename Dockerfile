@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     git \
     zip \
     unzip \
+    ffmpeg \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
@@ -40,10 +41,11 @@ RUN apt-get update && apt-get install -y \
     zip
 
 # Enable Apache mod_rewrite
-RUN a2enmod rewrite
+RUN a2enmod rewrite headers
 
-COPY ./apache-config /etc/apache2/sites-available
-RUN a2ensite laravel.conf && a2dissite 000-default default-ssl
+# Copy Apache configuration
+COPY ./apache-config/laravel.conf /etc/apache2/sites-available/laravel.conf
+RUN a2ensite laravel.conf && a2dissite 000-default.conf
 
 # Set Apache environment variables
 ENV APACHE_RUN_USER=www-data
@@ -62,11 +64,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set recommended PHP.ini settings
 RUN { \
-    echo "memory_limit=128M"; \
-    echo "max_execution_time=30"; \
+    echo "memory_limit=256M"; \
+    echo "max_execution_time=300"; \
     echo "max_input_time=200"; \
-    echo "post_max_size=8M"; \
-    echo "upload_max_filesize=8M"; \
+    echo "post_max_size=20M"; \
+    echo "upload_max_filesize=20M"; \
     echo "date.timezone=UTC"; \
     } > /usr/local/etc/php/conf.d/custom.ini
 
@@ -75,8 +77,11 @@ RUN git config --global --add safe.directory /var/www/html
 
 WORKDIR /var/www/html
 
-# Copy application files first
+# Copy application files
 COPY . /var/www/html/
+
+# Verify FFmpeg installation
+RUN ffmpeg -version
 
 # Use custom entrypoint
 ENTRYPOINT ["./docker-entrypoint.sh"]
