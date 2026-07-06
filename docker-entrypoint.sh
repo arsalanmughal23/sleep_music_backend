@@ -39,6 +39,11 @@ set_permissions() {
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 }
 
+storage_link() {
+    echo "Storage Linked"
+    php artisan storage:link
+}
+
 # Main execution
 main() {
     # Set permissions
@@ -50,6 +55,7 @@ main() {
     # Run artisan commands if Laravel exists
     if [ -f /var/www/html/artisan ]; then
         clear_cache
+        storage_link
         # run_migrations  # Uncomment if you want auto-migrations
     fi
     
