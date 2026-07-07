@@ -11,10 +11,10 @@
         <meta name="s3-service" token="{{ config('constants.s3.token') }}" presignedUrl="{{ config('constants.s3.presignedUrl') }}">
     @endif
 
-    <link rel="icon" href="{{ asset('/public/logo-icon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/logo-icon.ico') }}" type="image/x-icon">
 
     <!-- Bootstrap WYSIHTML5 -->
-    <link rel="stylesheet" href="{{ url('/public/css/admin/bootstrap3-wysihtml5.min.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/admin/bootstrap3-wysihtml5.min.css') }}">
 
 
     <!-- Bootstrap 3.3.7 -->
@@ -43,7 +43,7 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <!-- Custom Admin CSS -->
-    <link href="{{ url('/public/css/admin/custom.css') }}" rel="stylesheet">
+    <link href="{{ url('/css/admin/custom.css') }}" rel="stylesheet">
 
     {{--@yield('css')--}}
     @stack('css')
@@ -76,11 +76,11 @@
             <!-- Logo -->
             <a href="{{ url('/admin/home') }}" class="logo">
                 <span class="logo-mini">
-                  <img style="height:50px;" src="{{asset("public/logo.png")}}">
+                  <img style="height:50px;" src="{{asset("/logo.png")}}">
                 </span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg">
-                    <img style="height:50px;" src="{{asset("public/logo.png")}}">
+                    <img style="height:50px;" src="{{asset("/logo.png")}}">
                 </span>
             </a>
             <!-- Header Navbar -->
@@ -237,11 +237,11 @@
 
 
 <!-- Bootstrap WYSIHTML5 -->
-<script src="{{ url('/public/js/admin/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script src="{{ url('/js/admin/bootstrap3-wysihtml5.all.min.js') }}"></script>
 
 @stack('scripts')
-<script src="{{ url('/public/js/admin/custom.js') }}?type=tes"></script>
-<script src="{{ url('/public/js/admin/s3-services.js') }}"></script>
+<script src="{{ url('/js/admin/custom.js') }}?type=tes"></script>
+<script src="{{ url('/js/admin/s3-services.js') }}"></script>
 @stack('custom-js')
 </body>
 </html>
