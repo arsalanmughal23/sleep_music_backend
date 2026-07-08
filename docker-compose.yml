@@ -3,46 +3,43 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+      args:
+        - APP_ENV=${APP_ENV:-local}
     container_name: web_server
+    restart: unless-stopped
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/apache/laravel.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - ./:/var/www/html
-      - ./storage:/var/www/html/storage  # Persist storage
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
     depends_on:
       - db
     networks:
       - my_network
-    env_file:
-      - .env
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-    restart: unless-stopped
 
   db:
     image: mysql:8.0
     container_name: mysql_db
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_HOST=${DB_HOST}
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_USER=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - my_network
+    restart: unless-stopped
     env_file:
       - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+      - MYSQL_USER=${MYSQL_USER:-username}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-project_db}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - my_network
     command: --default-authentication-plugin=mysql_native_password
-    restart: unless-stopped
 
 networks:
   my_network:

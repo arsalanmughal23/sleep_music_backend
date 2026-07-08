@@ -1,10 +1,5 @@
-.env
-.git
-.gitignore
 node_modules
-vendor
-storage
-bootstrap/cache
-docker-compose.yml
-Dockerfile
-.dockerignore
+.git
+.env
+storage/framework/cache
+storage/logs/*.log
