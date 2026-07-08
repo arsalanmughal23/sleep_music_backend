@@ -1,62 +1,39 @@
-# These are some examples of commonly ignored file patterns.
-# You should customize this list as applicable to your project.
-# Learn more about .gitignore:
-#     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
-
-# Node
-/node_modules
+/vendor/
+/node_modules/
+/storage/
+/storage/*.key
+/storage/*.lock
+/public/storage/
 /public/hot
-/public/storage
-npm-debug.log
-yarn-error.log
+/public/sitemap.xml
+/public/robots.txt
+
+# Environment files
+.env
+.env.backup
+.env.production
 
 # Laravel specific
-/storage/**/*
-!/storage/.gitkeep
-/bootstrap/cache/**/*
-!/bootstrap/cache/.gitkeep
-/vendor
-.env
-db.sql
-
-# IDE
-/.idea
-/.vscode
-/.vagrant
 Homestead.json
 Homestead.yaml
+.env.testing
+.phpunit.result.cache
+.phpunit.cache
 
-# OS files
+# Compiled assets
+/public/css/
+/public/js/
+/mix-manifest.json
+/package-lock.json
+/yarn.lock
+
+# IDE
+/.idea/
+/.vscode/
+*.sublime-*
 .DS_Store
-Thumbs.db
 
-# Logs
-*.log
-
-# Compiled files
-*.class
-*.py[cod]
-*.jar
-*.war
-*.app
-*.exe
-
-# Build directories
-dist/
-target/
-node_modules/
-
-# Test reports
-TEST*.xml
-
-# Large media files
-*.mp4
-*.tiff
-*.avi
-*.flv
-*.mov
-*.wmv
-
-# Custom
-temp_auto_push.bat
-temp_interactive_push.bat
+# Tests
+/coverage/
+/phpunit.xml
+/.phpunit.result.cache
