@@ -1,0 +1,58 @@
+a[data-wysihtml5-command="insertImage"] {
+    display:none;
+}
+.toggle.btn{
+    width: auto !important;
+    height: auto !important;
+}
+textarea {
+    Resize: vertical
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.dataTables_info {
+    float: left;
+}
+
+.dataTables_length {
+    float: right;
+    padding: 0 0 0 5px;
+}
+
+.navbar-btn {
+    float: left;
+    margin: 8px;
+    color: #fff;
+}
+
+label.required:after {
+    content: '*';
+    font-weight: bolder;
+    color: red;
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+/* DataTable (Processing) Loader overlap on table view */
+div#dataTableBuilder_processing {
+    margin-top: 5px;
+}
+/* DataTable font-size should be consistent */
+#dataTableBuilder_wrapper>table#dataTableBuilder {
+    font-size: 14px;
+}
+/* DataTable rows data should be vertical align */
+#dataTableBuilder_wrapper>table#dataTableBuilder>tbody>tr>td {
+    vertical-align: middle;
+}
+/* Select2 MultiSelect should be vertically align text cover extra spaces due to bydefault lineHeight  */
+span.select2-selection__rendered {
+    display: contents !important;
+}
+#fimg {
+    max-width: 270px;
+    max-height: 200px;
+}

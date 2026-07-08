@@ -1,1 +1,0 @@
-Route::resource('$API_VERSION$/$MODEL_NAME_PLURAL_DASHED$', '$PATH_PREFIX$$MODEL_NAME$APIController');

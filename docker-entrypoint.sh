@@ -3,9 +3,28 @@ set -e
 
 echo "🚀 Starting entrypoint script..."
 
+# Set proper permissions
+set_permissions() {
+
+    # Create required directories
+    mkdir -p /var/www/html/storage/{logs,app/public}
+    mkdir -p /var/www/html/storage/framework/{cache,sessions,testing,views}
+
+    # Create log file if it doesn't exist
+    if [ ! -f /var/www/html/storage/logs/laravel.log ]; then
+        echo "📝 Creating laravel.log..."
+        touch /var/www/html/storage/logs/laravel.log
+    fi
+
+    echo "🔒 Setting permissions..."
+    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+    chmod 664 /var/www/html/storage/logs/laravel.log
+}
+
 # Install Composer dependencies
 composer_install() {
-    if [ -f ./composer.json ] && [ ! -d ./vendor ]; then
+    if [ -f /var/www/html/composer.json ] && [ ! -d /var/www/html/vendor ]; then
         echo "📦 Installing Composer dependencies..."
         composer install --no-interaction --no-progress --optimize-autoloader --no-dev || \
         composer install --no-interaction --no-progress --optimize-autoloader
@@ -30,13 +49,6 @@ clear_cache() {
         php /var/www/html/artisan route:cache || true
         php /var/www/html/artisan view:cache || true
     fi
-}
-
-# Set proper permissions
-set_permissions() {
-    echo "🔒 Setting permissions..."
-    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 }
 
 storage_link() {
