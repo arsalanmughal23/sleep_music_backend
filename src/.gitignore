@@ -3,7 +3,7 @@
 /storage/
 /storage/*.key
 /storage/*.lock
-/public/storage/
+/public/storage
 /public/hot
 /public/sitemap.xml
 /public/robots.txt
