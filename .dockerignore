@@ -1,5 +1,109 @@
-node_modules
-.git
+# ==========================================
+# VERSION CONTROL
+# ==========================================
+.git/
+.gitignore
+.gitattributes
+
+# ==========================================
+# ENVIRONMENT FILES
+# ==========================================
 .env
-storage/framework/cache
-storage/logs/*.log
+.env.*
+*.env
+/src/.env
+/src/.env.*.local
+
+# ==========================================
+# IDE & OS FILES
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+
+# ==========================================
+# LARAVEL APPLICATION (exclude from build)
+# ==========================================
+# Composer dependencies (rebuilt in container)
+/src/vendor/
+
+# Node.js dependencies (rebuilt in container)
+/src/node_modules/
+
+# Storage (generated at runtime)
+/src/storage/
+/src/storage/logs/
+/src/storage/framework/cache/
+/src/storage/framework/sessions/
+/src/storage/framework/testing/
+/src/storage/framework/views/
+
+# Tests (not needed in production container)
+/src/tests/
+
+# Laravel compiled assets
+/src/public/storage/  # Symlink, generated at runtime
+/src/public/vendor/   # Assets from packages
+
+# Laravel specific files
+/src/.env
+/src/.env.*.local
+/src/.phpunit.result.cache
+/src/.styleci.yml
+
+# Build assets (can be rebuilt)
+/src/public/css/
+/src/public/js/
+/src/public/mix-manifest.json
+
+# ==========================================
+# LOGS
+# ==========================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/src/storage/logs/*.log
+
+# ==========================================
+# CI/CD & DEPLOYMENT
+# ==========================================
+.github/
+.gitlab-ci.yml
+travis.yml
+
+# ==========================================
+# TEMPORARY FILES
+# ==========================================
+tmp/
+temp/
+*.tmp
+/src/temp/
+/src/tmp/
+
+# ==========================================
+# PYTHON (if not needed in container)
+# ==========================================
+/src/send_email.py
+*.pyc
+__pycache__/
+
+# ==========================================
+# DOCUMENTATION (optional - can be excluded)
+# ==========================================
+changelog.md
+readme.md
+/src/changelog.md
+/src/readme.md
+/src/phpunit.xml
+
+# ==========================================
+# CRITICAL: Keep these files in build context
+# ==========================================
+!docker-entrypoint.sh
+!Dockerfile
+!docker-compose.yml

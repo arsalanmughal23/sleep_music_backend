@@ -34,7 +34,9 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-project_db}
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql                           # Named volume for data
+      - ./docker/backups:/backups                        # For backups
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d:ro       # ✅ Config directory (read-only)
     ports:
       - "3306:3306"
     networks:

@@ -1,8 +1,12 @@
 # Docker
-/docker/data/
-/docker/volumes/
-/docker/mysql/
-*.pid
+docker/backups/*.sql
+docker/backups/*.tar.gz
+!docker/backups/.gitkeep
+
+# MySQL configuration (keep these)
+!docker/mysql/conf.d/
+!docker/mysql/conf.d/.gitkeep
+!docker/mysql/conf.d/*.cnf
 
 # IDE & Editor
 .idea/
@@ -18,6 +22,8 @@ Thumbs.db
 .env.*.local
 *.env
 /src/.env
+.env.backup
+.env.production
 
 # Logs
 *.log
