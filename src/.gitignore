@@ -1,0 +1,39 @@
+/vendor/
+/node_modules/
+/storage/
+/storage/*.key
+/storage/*.lock
+/public/storage
+/public/hot
+/public/sitemap.xml
+/public/robots.txt
+
+# Environment files
+.env
+.env.backup
+.env.production
+
+# Laravel specific
+Homestead.json
+Homestead.yaml
+.env.testing
+.phpunit.result.cache
+.phpunit.cache
+
+# Compiled assets
+/public/css/
+/public/js/
+/mix-manifest.json
+/package-lock.json
+/yarn.lock
+
+# IDE
+/.idea/
+/.vscode/
+*.sublime-*
+.DS_Store
+
+# Tests
+/coverage/
+/phpunit.xml
+/.phpunit.result.cache

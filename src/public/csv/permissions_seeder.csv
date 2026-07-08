@@ -1,0 +1,149 @@
+name,module_id,display_name,description,is_protected
+
+adminpanel,1,"Admin Panel","Admin Panel",1
+dashboard,2,Dashboard,Dashboard,1
+users.index,3,"List Users","List Roles",1
+users.create,3,"Create Users","Create Users",1
+users.show,3,"View User","View User",1
+users.edit,3,"Edit User","Edit User",1
+users.destroy,3,"Delete User","Delete User",1
+roles.index,4,"List Roles","List Roles",1
+roles.create,4,"Create Role","Create Role",1
+roles.show,4,"View Role","View Role",1
+roles.edit,4,"Edit Role","Edit Role",1
+roles.destroy,4,"Delete Role","Delete Role",1
+permissions.index,5,"List Permissions","List Permissions",1
+permissions.create,5,"Create Permission","Create Permission",1
+permissions.show,5,"View Permission","View Permission",1
+permissions.edit,5,"Edit Permission","Edit Permission",1
+permissions.destroy,5,"Delete Permission","Delete Permission",1
+modules.index,6,"List Modules","List Modules",1
+modules.create,6,"Create Module","Create Module",1
+modules.show,6,"View Module","View Module",1
+modules.edit,6,"Edit Module","Edit Module",1
+modules.destroy,6,"Delete Module","Delete Module",1
+languages.index,7,"List Languages","List Languages",1
+languages.create,7,"Create Languages","Create Languages",1
+languages.show,7,"View Languages","View Languages",1
+languages.edit,7,"Edit Languages","Edit Languages",1
+languages.destroy,7,"Delete Languages","Delete Languages",1
+pages.index,8,"List Pages","List Pages",1
+pages.create,8,"Create Pages","Create Pages",1
+pages.show,8,"View Pages","View Pages",1
+pages.edit,8,"Edit Pages","Edit Pages",1
+pages.destroy,8,"Delete Pages","Delete Pages",1
+contactus.index,9,"List Contact Us","List Contact Us Record",1
+contactus.create,9,"Create Contact Us","Create Contact Us Record",1
+contactus.show,9,"View Contact Us","View Contact Us Record",1
+contactus.edit,9,"Edit Contact Us","Edit Contact Us Record",1
+contactus.destroy,9,"Delete Contact Us","Delete Contact Us Record",1
+notifications.index,10,"List Notification","List Notification",1
+notifications.create,10,"Create Notification","Create Notification",1
+notifications.show,10,"View Notification","View Notification",1
+notifications.edit,10,"Edit Notification","Edit Notification",1
+notifications.destroy,10,"Delete Notification","Delete Notification",1
+menus.index,11,"List Menu","List Menu",1
+menus.create,11,"Create Menu","Create Menu",1
+menus.show,11,"View Menu","View Menu",1
+menus.edit,11,"Edit Menu","Edit Menu",1
+menus.destroy,11,"Delete Menu","Delete Menu",1
+settings.index,12,Settings,"Index Settings",0
+settings.create,12,Settings,"Create Settings",0
+settings.show,12,Settings,"Show Settings",0
+settings.edit,12,Settings,"Edit Settings",0
+settings.destroy,12,Settings,"Destroy Settings",0
+categories.index,13,Categories,"Index Categories",0
+categories.create,13,Categories,"Create Categories",0
+categories.show,13,Categories,"Show Categories",0
+categories.edit,13,Categories,"Edit Categories",0
+categories.destroy,13,Categories,"Destroy Categories",0
+medias.index,14,Media,"Index Media",0
+medias.create,14,Media,"Create Media",0
+medias.show,14,Media,"Show Media",0
+medias.edit,14,Media,"Edit Media",0
+medias.destroy,14,Media,"Destroy Media",0
+playlists.index,15,Playlists,"Index Playlists",0
+playlists.create,15,Playlists,"Create Playlists",0
+playlists.show,15,Playlists,"Show Playlists",0
+playlists.edit,15,Playlists,"Edit Playlists",0
+playlists.destroy,15,Playlists,"Destroy Playlists",0
+clients.index,16,Clients,"Index Clients",0
+clients.create,16,Clients,"Create Clients",0
+clients.show,16,Clients,"Show Clients",0
+clients.edit,16,Clients,"Edit Clients",0
+clients.destroy,16,Clients,"Destroy Clients",0
+client-connection-logs.index,17,"Client Connection Logs","Index Client Connection Logs",0
+client-connection-logs.create,17,"Client Connection Logs","Create Client Connection Logs",0
+client-connection-logs.show,17,"Client Connection Logs","Show Client Connection Logs",0
+client-connection-logs.edit,17,"Client Connection Logs","Edit Client Connection Logs",0
+client-connection-logs.destroy,17,"Client Connection Logs","Destroy Client Connection Logs",0
+analytics.index,23,Analytics,"Index Analytics",0
+analytics.create,23,Analytics,"Create Analytics",0
+analytics.show,23,Analytics,"Show Analytics",0
+analytics.edit,23,Analytics,"Edit Analytics",0
+analytics.destroy,23,Analytics,"Destroy Analytics",0
+likes.index,25,Likes,"Index Likes",0
+likes.create,25,Likes,"Create Likes",0
+likes.show,25,Likes,"Show Likes",0
+likes.edit,25,Likes,"Edit Likes",0
+likes.destroy,25,Likes,"Destroy Likes",0
+report-types.index,26,"Report Types","Index Report Types",0
+report-types.create,26,"Report Types","Create Report Types",0
+report-types.show,26,"Report Types","Show Report Types",0
+report-types.edit,26,"Report Types","Edit Report Types",0
+report-types.destroy,26,"Report Types","Destroy Report Types",0
+views.index,27,Views,"Index Views",0
+views.create,27,Views,"Create Views",0
+views.show,27,Views,"Show Views",0
+views.edit,27,Views,"Edit Views",0
+views.destroy,27,Views,"Destroy Views",0
+trending-artists.index,28,"Trending Artists","Index Trending Artists",0
+trending-artists.create,28,"Trending Artists","Create Trending Artists",0
+trending-artists.show,28,"Trending Artists","Show Trending Artists",0
+trending-artists.edit,28,"Trending Artists","Edit Trending Artists",0
+trending-artists.destroy,28,"Trending Artists","Destroy Trending Artists",0
+notification-users.index,27,"Notification Users","Index Notification Users",0
+notification-users.create,27,"Notification Users","Create Notification Users",0
+notification-users.show,27,"Notification Users","Show Notification Users",0
+notification-users.edit,27,"Notification Users","Edit Notification Users",0
+notification-users.destroy,27,"Notification Users","Destroy Notification Users",0
+mediaviews.index,28,Mediaviews,"Index Mediaviews",0
+mediaviews.create,28,Mediaviews,"Create Mediaviews",0
+mediaviews.show,28,Mediaviews,"Show Mediaviews",0
+mediaviews.edit,28,Mediaviews,"Edit Mediaviews",0
+mediaviews.destroy,28,Mediaviews,"Destroy Mediaviews",0
+orders.index,29,Orders,"Index Orders",0
+orders.create,29,Orders,"Create Orders",0
+orders.show,29,Orders,"Show Orders",0
+orders.edit,29,Orders,"Edit Orders",0
+orders.destroy,29,Orders,"Destroy Orders",0
+transactions.index,30,Transactions,"Index Transactions",0
+transactions.create,30,Transactions,"Create Transactions",0
+transactions.show,30,Transactions,"Show Transactions",0
+transactions.edit,30,Transactions,"Edit Transactions",0
+transactions.destroy,30,Transactions,"Destroy Transactions",0
+cards.index,31,Cards,"Index Cards",0
+cards.create,31,Cards,"Create Cards",0
+cards.show,31,Cards,"Show Cards",0
+cards.edit,31,Cards,"Edit Cards",0
+cards.destroy,31,Cards,"Destroy Cards",0
+delete-types.index,34,"Delete Types","Index Delete Types",0
+delete-types.create,34,"Delete Types","Create Delete Types",0
+delete-types.show,34,"Delete Types","Show Delete Types",0
+delete-types.edit,34,"Delete Types","Edit Delete Types",0
+delete-types.destroy,34,"Delete Types","Destroy Delete Types",0
+app-ratings.index,35,"App Ratings","Index App Ratings",0
+app-ratings.create,35,"App Ratings","Create App Ratings",0
+app-ratings.show,35,"App Ratings","Show App Ratings",0
+app-ratings.edit,35,"App Ratings","Edit App Ratings",0
+app-ratings.destroy,35,"App Ratings","Destroy App Ratings",0
+user-subscriptions.index,35,"User Subscriptions","Index User Subscriptions",0
+user-subscriptions.create,35,"User Subscriptions","Create User Subscriptions",0
+user-subscriptions.show,35,"User Subscriptions","Show User Subscriptions",0
+user-subscriptions.edit,35,"User Subscriptions","Edit User Subscriptions",0
+user-subscriptions.destroy,35,"User Subscriptions","Destroy User Subscriptions",0
+packages.index,36,Packages,"Index Packages",0
+packages.create,36,Packages,"Create Packages",0
+packages.show,36,Packages,"Show Packages",0
+packages.edit,36,Packages,"Edit Packages",0
+packages.destroy,36,Packages,"Destroy Packages",0
