@@ -232,7 +232,13 @@ class Category extends Model
      */
     public function getImageUrlAttribute()
     {
-        return $this->image ?? url('/public/placeholder-image.png');
+        if (substr($this->image, 0, 4) === "http")
+            return $this->image;
+
+        if ($this->image)
+            return asset("storage/$this->image");
+
+        return asset('images/placeholder-image.png');
     }
 
     public function getMediaCountAttribute()
