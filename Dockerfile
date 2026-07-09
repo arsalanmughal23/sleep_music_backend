@@ -9,6 +9,7 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
 RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     --no-install-suggests \
+    default-mysql-client \
     git \
     unzip \
     libpng-dev \
@@ -27,6 +28,8 @@ RUN a2enmod rewrite headers
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
+COPY ./docker/mysql/init.sql /etc/mysql/init.sql
 
 # Copy and set up entrypoint
 COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
