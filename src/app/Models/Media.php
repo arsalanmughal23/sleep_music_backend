@@ -299,19 +299,13 @@ class Media extends Model
      */
     public function getImageUrlAttribute()
     {
-//        if (substr($this->image, 0, 4) === "http") {
-//            return $this->image;
-//        }
-////        return $this->image ? \Storage::url($this->image) : route('api.resize', ['img' => 'users/user.png', 'w=100', 'h=100']);
-//        $image = "public/media.png";
-//        if ($this->image) {
-//            $image = $this->image;
-//        }
-//        return route('api.resize', ['img' => $image]);
-        return $this->image ? $this->image : url('/public/placeholder-image.png');
-//        return ($this->image && storage_path(url('storage/app/' . $this->image))) ? route('api.resize', ['img' => $this->image]) : route('api.resize', ['img' => 'users/user.png', 'w=100', 'h=100']);
-//        return \Storage::url($this->image);
-//        return route('api.resize', ['img' => $this->image]);
+        if (substr($this->image, 0, 4) === "http")
+            return $this->image;
+
+        if ($this->image)
+            return asset("storage/$this->image");
+
+        return asset('images/placeholder-image.png');
     }
 
     public function getFileAbsoluteUrlAttribute()

@@ -13,8 +13,10 @@ class CategoryAndSoundSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('DELETE FROM `categories` WHERE id IS NOT NULL');
-        DB::statement('DELETE FROM `media` WHERE id IS NOT NULL');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::statement('TRUNCATE TABLE `categories`');
+        DB::statement('TRUNCATE TABLE `media`');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
         $allData = config('category_and_sounds');
         $medias = [];
