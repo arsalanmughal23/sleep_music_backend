@@ -106,12 +106,12 @@ class Media extends Model
         'category_id',
         'name',
         'image',
+        'file_path',
         'file_url',
         'is_mixer',
         'is_unlockable',
         'duration',
 
-        // 'file_path',
         // 'file_type',
         // 'file_mime',
         // 'playlist',

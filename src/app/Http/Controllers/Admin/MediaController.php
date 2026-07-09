@@ -293,33 +293,38 @@ class MediaController extends AppBaseController
 
         if ($request->hasFile('input_file')) {
             $file = $request->file('input_file');
-            $FFMPEG = new GenerateMixSoundHelper();
-            $optimizedFileAbsolutePath = $FFMPEG->optimizeServerTempFile($file);
+            $destination = FileHelper::getFileName($file);
 
-            if (!$optimizedFileAbsolutePath) {
+            $FFMPEG = new GenerateMixSoundHelper();
+            $optimizedFileStoragePath = $FFMPEG->optimizeServerTempFile($file, $destination);
+
+            if (!$optimizedFileStoragePath) {
                 Flash::error($this->BreadCrumbName . ' file optimization is failed!');
                 return redirect(route('admin.medias.index'));
             }
 
-            $optimizedFileStoragePath = storage_path('app/'.$optimizedFileAbsolutePath);
-            $mediaDuration = $FFMPEG->getMediaDuration($optimizedFileStoragePath);
-            $mediaDurationInSeconds = Util::timeToSeconds($mediaDuration);
+            $optimizedFileAbsolutePath = storage_path('app/'.$optimizedFileStoragePath);
+            $mediaDurationInSeconds = $FFMPEG->getMediaDurationInSeconds($optimizedFileAbsolutePath);
 
-            $fileS3Url = FileHelper::s3Upload($optimizedFileStoragePath);
-            if (!$fileS3Url) {
+            $filePath = FileHelper::upload($optimizedFileAbsolutePath, 'public', "audio/$destination");
+            if (!$filePath) {
                 Flash::error($this->BreadCrumbName . ' file uploading on s3 is failed!');
                 return redirect(route('admin.medias.index'));
             }
-
-            $request['file_url'] = $fileS3Url;
-            Storage::disk('local')->delete($optimizedFileAbsolutePath);
+            $request['file_url'] = Storage::disk('public')->url($filePath);
+            $request['file_path'] = $filePath;
+            Storage::disk('local')->delete($optimizedFileStoragePath);
+            Storage::disk('public')->delete($media->file_path);
         }
+
         if ($request->hasFile('input_image')) {
             $image = $request->file('input_image');
-            $image = $image->getPathName();
-            $request['image'] = FileHelper::s3Upload($image);
+            $destination = FileHelper::getFileName($image);
+
+            $request['image'] = FileHelper::upload($image->getPathName(), 'public', "image/sound/$destination");
+            $request['image'] && Storage::disk('public')->delete($media->image);
         }
-        $input = $request->only(['category_id', 'name', 'is_premium', 'image', 'file_url']);
+        $input = $request->only(['category_id', 'name', 'is_premium', 'image', 'file_url', 'file_path']);
         $input['duration'] = $mediaDurationInSeconds ?? $media->duration;
 
         $media = $this->mediaRepository->updateRecord($input, $id);

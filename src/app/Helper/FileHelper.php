@@ -4,6 +4,8 @@ namespace App\Helper;
 
 use Illuminate\Support\Facades\Log;
 use CURLFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * Class FileHelper
@@ -15,6 +17,30 @@ class FileHelper
     /**
      * @return string
      */
+
+    public static function upload($filePath, $disk, $destination = null) {
+        $output = null;
+        switch ($disk) {
+            case 's3':
+                $output = FileHelper::s3Upload($filePath); // return fileUrl
+                break;
+            case 'local':
+            case 'public':
+                $output = "uploads/$destination";
+                Storage::disk($disk)->put($output, file_get_contents($filePath)); // return filePath
+                break;
+            default :
+                throw new \InvalidArgumentException("Invalid disk: {$disk}");
+        }
+        return $output;
+    }
+
+    public static function getFileName($file) {
+        $fileExtension = $file->getClientOriginalExtension();
+        $fileNameOnly = Str::slug(str_replace($fileExtension, '', $file->getClientOriginalName()));
+        $uuid = Str::uuid();
+        return "{$uuid}_{$fileNameOnly}.{$fileExtension}";
+    }
 
     public static function s3Upload($file) {
         $s3Meta = config('constants.s3');

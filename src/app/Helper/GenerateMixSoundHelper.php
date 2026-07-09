@@ -53,6 +53,12 @@ class GenerateMixSoundHelper
         return $duration;
     }
 
+    public function getMediaDurationInSeconds($filePath)
+    {
+        $mediaDuration = $this->getMediaDuration($filePath);
+        return Util::timeToSeconds($mediaDuration);
+    }
+
     public function createMixSound($medias)
     {
         Log::info('GenerateMixSoundHelper::HelperFunction START');
@@ -135,27 +141,31 @@ class GenerateMixSoundHelper
         ];
     }
 
-    public function optimizeServerTempFile($file)
+    public function optimizeServerTempFile($file, $destination = null)
     {
-        $originalName = $file->getClientOriginalName();
-        $originalNameParts = explode('.', $originalName);
-        $extension = end($originalNameParts);
+        !$destination && $destination = uniqid('optimized_audio_') . '.' . $file->getClientOriginalExtension();
         
-        $fileAbsolutePath = Storage::disk('local')->put('temp', $file);
-        $fileStoragePath = storage_path('app/'.$fileAbsolutePath);
+        $fileStoragePath = Storage::disk('local')->put('temp', $file);
+        $fileAbsolutePath = storage_path("app/$fileStoragePath");
 
         Log::info(' ==> File is Optimizing');
-        $optimizedOutputFileAbsolutePath = 'temp/' . uniqid('temp_audio_optimized_file_') . '.' . $extension;
-        $optimizedOutputFileStoragePath = storage_path('app/'.$optimizedOutputFileAbsolutePath);
-        $optimizingCmd = $this->ffmepgPath.' -i '.$fileStoragePath.' -b:a 128k '.$optimizedOutputFileStoragePath;
+        $optimizedOutputFileStoragePath = "temp/$destination";
+        $optimizedOutputFileAbsolutePath = storage_path("app/$optimizedOutputFileStoragePath");
+        $optimizingCmd = $this->ffmepgPath.' -i '.$fileAbsolutePath.' -b:a 128k '.$optimizedOutputFileAbsolutePath;
         $cmdExecutedOutput = $this->executeFFmpegCommand($optimizingCmd);
         Log::info(' ==> File is Optimized');
 
         if ($cmdExecutedOutput['status']) {
-            Storage::disk('local')->delete($fileAbsolutePath);
-            return $optimizedOutputFileAbsolutePath;
+            Storage::disk('local')->delete($fileStoragePath);
+            return $optimizedOutputFileStoragePath;
         }
 
-        return null;
+        throw new \RuntimeException(
+            sprintf(
+                'Failed to optimize audio file "%s". FFmpeg error: %s',
+                $file->getClientOriginalName(),
+                $cmdExecutedOutput['commandExecutedOutput'] ?? 'Unknown error'
+            )
+        );
     }
 }
