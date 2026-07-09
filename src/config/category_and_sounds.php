@@ -166,11 +166,11 @@ return [
                 "is_unlockable" => 0,
                 "user_id" => 1,
                 "category_id" => null,
-                "image" => 'uploads/image/sound/10****.png',
+                "image" => null,
                 "file_type" => 10,
-                "file_path" => 'uploads/audio/10****.mp3',
+                "file_path" => null,
                 "file_mime" => null,
-                "file_url" => env('APP_URL').'/storage/uploads/audio/10****.mp3'
+                "file_url" => null
             ]
         ]
     ],
