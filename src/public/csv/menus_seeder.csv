@@ -1,0 +1,31 @@
+name,module_id,icon,slug,position,is_protected,static,status
+Dashboard,1,"fa fa-dashboard",dashboard,1,1,0,1
+Users,3,"fa fa-user",users,2,1,0,1
+Roles,4,"fa fa-edit",roles,3,1,0,1
+Permissions,5,"fa fa-check-square-o",permissions,4,1,0,1
+Modules,6,"fa fa-database",modules,5,1,0,1
+Languages,7,"fa fa-comments-o",languages,6,1,0,1
+Pages,8,"fa fa-wpforms",pages,7,1,0,1
+Menus,9,"fa fa-th",menus,8,1,0,1
+"Contact us",10,"fa fa-mail-forward",contactus,9,1,0,1
+Notifications,11,"fa fa-bell",notifications,10,1,0,1
+Settings,12,"fa fa-gears",settings,11,0,0,1
+Categories,13,"fa fa-cubes",categories,12,0,0,1
+Media,14,"fa fa-music",media,13,0,0,1
+Playlists,15,"fa fa-th-list",playlists,14,0,0,1
+Clients,16,"fa fa-user-secret",clients,15,0,0,1
+"Client Connection Logs",17,"fa fa-glass",client-connection-logs,16,0,0,1
+Analytics,23,"fa fa-glass",analytics,21,0,0,1
+Likes,25,"fa fa-heart",likes,22,0,0,1
+"Report Types",26,"fa fa-ban",report-types,23,0,0,1
+Views,27,"fa fa-glass",views,24,0,0,1
+"Trending Artists",28,"fa fa-user",trending-artists,25,0,0,1
+"Notification Users",27,"fa fa-sticky-note",notification-users,24,0,0,1
+Mediaviews,28,"fa fa-glass",mediaviews,25,0,0,1
+Orders,29,"fa fa-shopping-cart",orders,26,0,0,1
+Transactions,30,"fa fa-credit-card",transactions,27,0,0,1
+Cards,31,"fa fa-credit-card",cards,28,0,0,1
+"Delete Types",34,"fa fa-glass",delete-types,29,0,0,1
+"App Ratings",35,"fa fa-glass",app-ratings,30,0,0,1
+"User Subscriptions",35,"fa fa-glass",user-subscriptions,30,0,0,1
+Packages,36,"fa fa-tag",packages,31,0,0,1

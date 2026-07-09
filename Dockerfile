@@ -5,86 +5,38 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
     && sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list \
     && sed -i '/buster-updates/d' /etc/apt/sources.list
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
+    --no-install-recommends \
+    --no-install-suggests \
     git \
-    zip \
     unzip \
-    ffmpeg \
     libpng-dev \
     libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libicu-dev \
-    libxslt1-dev \
-    libzip-dev \
-    libonig-dev \
-    libxml2-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    cron \
-    && docker-php-ext-configure gd \
-    && docker-php-ext-install -j$(nproc) \
-    bcmath \
-    ctype \
-    curl \
-    dom \
-    ftp \
-    gd \
-    intl \
-    mbstring \
-    opcache \
-    pdo_mysql \
-    simplexml \
-    soap \
-    sockets \
-    xsl \
-    zip
+    ffmpeg=7:* \
+    && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd mbstring pdo_mysql zip opcache \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite headers
 
-# Copy Apache configuration
-COPY ./apache-config/laravel.conf /etc/apache2/sites-available/laravel.conf
-RUN a2ensite laravel.conf && a2dissite 000-default.conf
-
-# Set Apache environment variables
-ENV APACHE_RUN_USER=www-data
-ENV APACHE_RUN_GROUP=www-data
-ENV APACHE_LOG_DIR=/var/log/apache2
-ENV APACHE_LOCK_DIR=/var/lock/apache2
-ENV APACHE_PID_FILE=/var/run/apache2/apache2.pid
-ENV APACHE_RUN_DIR=/var/run/apache2
-
-# Create required directories
-RUN mkdir -p ${APACHE_RUN_DIR} ${APACHE_LOCK_DIR} ${APACHE_LOG_DIR} && \
-    chown -R www-data:www-data ${APACHE_RUN_DIR} ${APACHE_LOCK_DIR} ${APACHE_LOG_DIR}
-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set recommended PHP.ini settings
-RUN { \
-    echo "memory_limit=256M"; \
-    echo "max_execution_time=300"; \
-    echo "max_input_time=200"; \
-    echo "post_max_size=20M"; \
-    echo "upload_max_filesize=20M"; \
-    echo "date.timezone=UTC"; \
-    } > /usr/local/etc/php/conf.d/custom.ini
-
-# Fix Git security issue
-RUN git config --global --add safe.directory /var/www/html
-
 WORKDIR /var/www/html
 
-# Copy application files
-COPY . /var/www/html/
+# Copy and set up entrypoint
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Verify FFmpeg installation
 RUN ffmpeg -version
 
 # Use custom entrypoint
-ENTRYPOINT ["./docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Start Apache
 CMD ["apache2-foreground"]
